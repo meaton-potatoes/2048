@@ -13,22 +13,21 @@ function Game(){
     [null,null,null,null]
   ],
   this.setUp = function(){
-    for (let i = 0; i < 2; i++) {
-      let randomTile = this.generateRandomTile();
-      this.board[randomTile.x][randomTile.y] = randomTile.value;
-    }
+    this.generateRandomTile(2);
     this.render();
   }
 }
 
-Game.prototype.generateRandomTile = function () {
-  let x = Math.round(Math.random() * 3)
-  let y = Math.round(Math.random() * 3)
-  while (this.board[x][y] !== null) {
-    x = Math.round(Math.random() * 4)
-    y = Math.round(Math.random() * 4)
+Game.prototype.generateRandomTile = function (num) {
+  for (let i = 0; i < num; i++) {
+    let x = Math.round(Math.random() * 3)
+    let y = Math.round(Math.random() * 3)
+    while (this.board[x][y] !== null) {
+      x = Math.round(Math.random() * 3)
+      y = Math.round(Math.random() * 3)
+    }
+    this.board[x][y] = [2,4][Math.round(Math.random())];
   }
-  return {x: x, y:  y, value: [2,4][Math.round(Math.random())]}
 };
 
 
@@ -50,8 +49,6 @@ Game.prototype.move = function(direction){
     } else { // down and right
       for (let x = this.board.length - 1; x >= 0; x--) {
         for (let y = this.board.length - 1; y >= 0; y--) {
-          console.log([x, y]);
-          console.log(this.board[x][y]);
           if (this.board[x][y] !== null) {
             let farthestEmpty = this.findFarthestMove([x, y], direction);
             if (farthestEmpty !== undefined) {
@@ -65,6 +62,7 @@ Game.prototype.move = function(direction){
       }
     }
   }
+  this.generateRandomTile(1);
   this.render();
 };
 

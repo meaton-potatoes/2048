@@ -93,11 +93,8 @@ Game.prototype.findFarthestMove = function(currentPos, direction){
   let nextXDiff = DIRECTIONAL_CONSTANTS[direction][0];
   let nextYDiff = DIRECTIONAL_CONSTANTS[direction][1];
   let nextPos = [x + nextXDiff, y + nextYDiff];
-  if (nextPos[0] < 0 || nextPos[0] > 3 || nextPos[1] < 0 || nextPos[1] > 3 ||
-      this.board[nextPos[0]][nextPos[1]] !== null) {
-        console.log(`${nextPos} doesn't work!`);
-        console.log(`stay at ${currentPos}`);
-        return currentPos;
+  if (!this.inBounds(nextPos) || this.board[nextPos[0]][nextPos[1]] !== null) {
+    return currentPos;
   } else {
     let nextTry = this.findFarthestMove(nextPos, direction);
     if (nextTry === null) {
@@ -106,6 +103,10 @@ Game.prototype.findFarthestMove = function(currentPos, direction){
       return nextTry;
     }
   }
+}
+
+Game.prototype.inBounds = function(pos){
+  return (pos[0] > -1 && pos[0] < 4 && pos[1] > -1 && pos[1] < 4)
 }
 
 

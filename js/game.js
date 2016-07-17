@@ -6,29 +6,28 @@ const DIRECTIONAL_CONSTANTS = {
 }
 
 function Game(){
-  this.board = generateBoard()
+  this.generateBoard();
 }
 
-function generateBoard() {
-  let board = new Array(4);
-  for (let i = 0; i < board.length; i++) {
-    board[i] = new Array(4);
+Game.prototype.generateBoard = function(){
+  this.board = new Array(4);
+  for (let i = 0; i < this.board.length; i++) {
+    this.board[i] = new Array(4);
   }
-  return generateRandomTile(2, board);
+  this.generateRandomTile(2);
 }
 
 
-function generateRandomTile (num, board) {
+Game.prototype.generateRandomTile = function(num) {
   for (let i = 0; i < num; i++) {
     let x = Math.round(Math.random() * 3)
     let y = Math.round(Math.random() * 3)
-    while (board[x][y] !== undefined) {
+    while (this.board[x][y] !== undefined) {
       x = Math.round(Math.random() * 3)
       y = Math.round(Math.random() * 3)
     }
-    board[x][y] = [2,4][Math.round(Math.random())];
+    this.board[x][y] = [2,4][Math.round(Math.random())];
   }
-  return board;
 };
 
 Game.prototype.render = function () {
@@ -37,8 +36,9 @@ Game.prototype.render = function () {
   const boxPositions = [10, 142, 274, 406];
   for (let x = 0; x < this.board.length; x++) {
     for (let y = 0; y < this.board.length; y++) {
+      let color = colorFinder(this.board[x][y]);
       if (this.board[x][y] !== undefined) {
-        ctx.fillStyle = "gold";
+        ctx.fillStyle = color;
         ctx.fillRect (boxPositions[y], boxPositions[x], 122, 122);
         ctx.font = "4em Signika, sans-serif";
         ctx.fillStyle = "black";
@@ -52,13 +52,25 @@ Game.prototype.render = function () {
 };
 
 Game.prototype.moveTiles = function(direction){
-  for (let x = 0; x < this.board.length; x++) {
-    for (let y = 0; y < this.board[x].length; y++) {
-      if (this.board[x][y] !== undefined) {
-        this.moveTile([x, y], this.board[x][y], direction);
+  if (["up", "left"].includes(direction)){
+    for (let x = 0; x < this.board.length; x++) {
+      for (let y = 0; y < this.board[x].length; y++) {
+        if (this.board[x][y] !== undefined) {
+          this.moveTile([x, y], this.board[x][y], direction);
+        }
+      }
+    }
+  } else {
+    for (let x = this.board.length - 1; x >= 0; x--) {
+      for (let y = this.board.length - 1; y >= 0; y--) {
+        if (this.board[x][y] !== undefined) {
+          this.moveTile([x, y], this.board[x][y], direction);
+        }
       }
     }
   }
+  this.generateRandomTile(1);
+  this.render();
 }
 
 Game.prototype.moveTile = function(currentPos, currentValue, direction){
@@ -114,6 +126,37 @@ Game.prototype.nextMoveHitsAnotherTile = function(pos, direction){
   nextX = pos[0] + dir[0];
   nextY = pos[1] + dir[1]
   return (this.board[nextX][nextY] !== undefined);
+}
+
+function colorFinder(value){
+  switch (value){
+    case 2:
+      return "crimson";
+    case 4:
+      return "orangered";
+    case 8:
+      return "orange";
+    case 16:
+      return "gold";
+    case 32:
+      return "yellow";
+    case 64:
+      return "yellowgreen";
+    case 128:
+      return "chartreuse";
+    case 256:
+      return "limegreen";
+    case 512:
+      return "lightseagreen";
+    case 1024:
+      return "cornflowerblue";
+    case 2048:
+      return "royalblue";
+    case 4096:
+      return "purple";
+    case 8192:
+      return "plum";
+  }
 }
 
 module.exports = Game;

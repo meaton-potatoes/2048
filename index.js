@@ -5,17 +5,17 @@ $(document).ready(function(){
   draw();
 
   let game = new Game();
-  game.setUp();
+  game.render();
 
   $(document).keydown(function(e){
     if (e.keyCode === 38) { // up
-      game.move("up");
+      game.moveTiles("up");
     } else if (e.keyCode === 40) { // down
-      game.move("down");
+      game.moveTiles("down");
     } else if (e.keyCode === 37) { // left
-      game.move("left");
+      game.moveTiles("left");
     } else if (e.keyCode === 39) { // right
-      game.move("right");
+      game.moveTiles("right");
     }
   });
 

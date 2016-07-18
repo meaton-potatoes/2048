@@ -54,3 +54,19 @@ h2 {
     80%{-webkit-transform:scale(1)}
     to{-webkit-transform:scale(1)}
 }
+
+.double {
+  animation: double .3s ease-out;
+  -webkit-animation: double .3s ease-out;
+}
+
+@keyframes double {
+    from{transform:scale(0)}
+    80%{transform:scale(1.2)}
+    to{transform:scale(1)}
+}
+@-webkit-keyframes double {
+    from{-webkit-transform:scale(0)}
+    80%{-webkit-transform:scale(1)}
+    to{-webkit-transform:scale(1)}
+}

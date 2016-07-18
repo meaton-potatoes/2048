@@ -138,7 +138,6 @@
 	};
 	
 	Game.prototype.moveTiles = function(direction){
-	  $("#scorediff").text("")
 	  if (["up", "left"].includes(direction)){
 	    for (let x = 0; x < this.board.length; x++) {
 	      for (let y = 0; y < this.board[x].length; y++) {

@@ -12,7 +12,7 @@ function Game(){
 Game.prototype.generateBoard = function(){
   this.board = new Array(4);
   for (let i = 0; i < this.board.length; i++) {
-    this.board[i] = new Array(4);
+    this.board[i] = [null, null, null, null];
   }
   this.render();
   this.generateRandomTile(2);
@@ -20,11 +20,22 @@ Game.prototype.generateBoard = function(){
 }
 
 
+Game.prototype.openSpaces = function(){
+  this.board.forEach(function(row){
+    row.forEach(function(pos){
+      if (pos == null) {
+        return true;
+      }
+    })
+  })
+  return false;
+}
+
 Game.prototype.generateRandomTile = function(num) {
   for (let i = 0; i < num; i++) {
     let x = Math.round(Math.random() * 3)
     let y = Math.round(Math.random() * 3)
-    while (this.board[x][y] !== undefined) {
+    while (this.board[x][y] !== null) {
       x = Math.round(Math.random() * 3)
       y = Math.round(Math.random() * 3)
     }
@@ -33,21 +44,17 @@ Game.prototype.generateRandomTile = function(num) {
 };
 
 Game.prototype.render = function () {
-  let canvas = document.getElementById("canvas");
-  let ctx = canvas.getContext("2d");
-  const boxPositions = [10, 142, 274, 406];
   for (let x = 0; x < this.board.length; x++) {
     for (let y = 0; y < this.board.length; y++) {
       let color = colorFinder(this.board[x][y]);
-      if (this.board[x][y] !== undefined) {
-        ctx.fillStyle = color;
-        ctx.fillRect (boxPositions[y], boxPositions[x], 122, 122);
-        ctx.font = "4em Signika, sans-serif";
-        ctx.fillStyle = "black";
-        ctx.fillText(this.board[x][y], boxPositions[y] + 40, boxPositions[x] + 75);
+      if (this.board[x][y] !== null) {
+        let square = $(document).find(`[data-pos="${[x,y]}"]`)
+        square.css("background", color);
+        square.text(this.board[x][y])
       } else {
-        ctx.fillStyle = "#6492ac";
-        ctx.fillRect(boxPositions[y], boxPositions[x], 122, 122);
+        let square = $(document).find(`[data-pos="${[x,y]}"]`)
+        square.css("background", "#6492ac");
+        square.text("")
       }
     }
   }
@@ -57,7 +64,7 @@ Game.prototype.moveTiles = function(direction){
   if (["up", "left"].includes(direction)){
     for (let x = 0; x < this.board.length; x++) {
       for (let y = 0; y < this.board[x].length; y++) {
-        if (this.board[x][y] !== undefined) {
+        if (this.board[x][y] !== null) {
           this.moveTile([x, y], this.board[x][y], direction);
         }
       }
@@ -65,7 +72,7 @@ Game.prototype.moveTiles = function(direction){
   } else {
     for (let x = this.board.length - 1; x >= 0; x--) {
       for (let y = this.board.length - 1; y >= 0; y--) {
-        if (this.board[x][y] !== undefined) {
+        if (this.board[x][y] !== null) {
           this.moveTile([x, y], this.board[x][y], direction);
         }
       }
@@ -90,11 +97,11 @@ Game.prototype.moveTile = function(currentPos, currentValue, direction){
         if (this.board[nextX][nextY] === currentValue) {
           console.log("next move hits another LIKE current tile");
           this.board[nextX][nextY] *= 2;
-          this.board[currentPos[0]][currentPos[1]] = undefined;
+          this.board[currentPos[0]][currentPos[1]] = null;
           break;
         } else {
           console.log("next move hits another tile that is UNLIKE current tile");
-          this.board[currentPos[0]][currentPos[1]] = undefined;
+          this.board[currentPos[0]][currentPos[1]] = null;
           this.board[currentX][currentY] = currentValue;
           break;
         }
@@ -105,7 +112,7 @@ Game.prototype.moveTile = function(currentPos, currentValue, direction){
       }
     } else {
       console.log("next move is OUT of bounds");
-      this.board[currentPos[0]][currentPos[1]] = undefined;
+      this.board[currentPos[0]][currentPos[1]] = null;
       this.board[currentX][currentY] = currentValue;
       break;
     }
@@ -127,7 +134,7 @@ Game.prototype.nextMoveHitsAnotherTile = function(pos, direction){
   dir = DIRECTIONAL_CONSTANTS[direction];
   nextX = pos[0] + dir[0];
   nextY = pos[1] + dir[1]
-  return (this.board[nextX][nextY] !== undefined);
+  return (this.board[nextX][nextY] !== null);
 }
 
 function colorFinder(value){

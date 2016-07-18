@@ -38,3 +38,19 @@ h2 {
   font-size: 4em;
   color: #000;
 }
+
+.new-tile {
+  animation: popout .2s ease-out;
+  -webkit-animation: popout .2s ease-out;
+}
+
+@keyframes popout {
+    from{transform:scale(0)}
+    80%{transform:scale(1)}
+    to{transform:scale(1)}
+}
+@-webkit-keyframes popout {
+    from{-webkit-transform:scale(0)}
+    80%{-webkit-transform:scale(1)}
+    to{-webkit-transform:scale(1)}
+}

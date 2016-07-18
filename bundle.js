@@ -81,8 +81,10 @@
 	}
 	
 	Game.prototype.generateBoard = function(){
+	  this.transitions = new Array(4);
 	  this.board = new Array(4);
 	  for (let i = 0; i < this.board.length; i++) {
+	    this.transitions[i] = [null, null, null, null];
 	    this.board[i] = [null, null, null, null];
 	  }
 	  this.generateRandomTile(2);
@@ -111,6 +113,7 @@
 	      y = Math.round(Math.random() * 3)
 	    }
 	    this.board[x][y] = [2,4][Math.round(Math.random())];
+	    this.transitions[x][y] = "new-tile"
 	  }
 	};
 	
@@ -124,12 +127,13 @@
 	  for (let x = 0; x < this.board.length; x++) {
 	    for (let y = 0; y < this.board.length; y++) {
 	      let color = colorFinder(this.board[x][y]);
+	      let square = $(document).find(`[data-pos="${[x,y]}"]`)
+	      square.removeClass();
 	      if (this.board[x][y] !== null) {
-	        let square = $(document).find(`[data-pos="${[x,y]}"]`)
 	        square.css("background", color);
 	        square.text(this.board[x][y])
+	        square.addClass(this.transitions[x][y]);
 	      } else {
-	        let square = $(document).find(`[data-pos="${[x,y]}"]`)
 	        square.css("background", "#6492ac");
 	        square.text("")
 	      }
@@ -137,8 +141,15 @@
 	  }
 	};
 	
+	Game.prototype.resetTransitions = function () {
+	  this.transitions = new Array(4);
+	  for (let i = 0; i < this.board.length; i++) {
+	    this.transitions[i] = [null, null, null, null];
+	  }
+	};
+	
 	Game.prototype.moveTiles = function(direction){
-	  $("#scorediff").text("")
+	  this.resetTransitions();
 	  if (["up", "left"].includes(direction)){
 	    for (let x = 0; x < this.board.length; x++) {
 	      for (let y = 0; y < this.board[x].length; y++) {
@@ -177,11 +188,22 @@
 	          this.board[nextX][nextY] *= 2;
 	          this.board[currentPos[0]][currentPos[1]] = null;
 	          this.score += this.board[nextX][nextY]
+	          this.transitions[nextX][nextY] = "double";
+	          if (["up", "down"].includes(direction)) {
+	            this.transitions[currentPos[0]][currentPos[1]] = `${direction}-${Math.abs(nextY - currentPos[1])}`;
+	          } else {
+	            this.transitions[currentPos[0]][currentPos[1]] = `${direction}-${Math.abs(nextX - currentPos[0])}`;
+	          }
 	          break;
 	        } else {
 	          // console.log("next move hits another tile that is UNLIKE current tile");
 	          this.board[currentPos[0]][currentPos[1]] = null;
 	          this.board[currentX][currentY] = currentValue;
+	          if (["up", "down"].includes(direction)) {
+	            this.transitions[currentX][currentY] = `${direction}-${Math.abs(currentPos[0] - currentX)}`;
+	          } else {
+	            this.transitions[currentX][currentY] = `${direction}-${Math.abs(currentPos[1] - currentY)}`;
+	          }
 	          break;
 	        }
 	      } else {
@@ -193,9 +215,15 @@
 	      // console.log("next move is OUT of bounds");
 	      this.board[currentPos[0]][currentPos[1]] = null;
 	      this.board[currentX][currentY] = currentValue;
+	      if (["up", "down"].includes(direction)) {
+	        this.transitions[currentX][currentY] = `${direction}-${Math.abs(currentPos[0] - currentX)}`;
+	      } else {
+	        this.transitions[currentX][currentY] = `${direction}-${Math.abs(currentPos[1] - currentY)}`;
+	      }
 	      break;
 	    }
 	  }
+	  console.log(this.transitions);
 	  this.render();
 	  return;
 	}

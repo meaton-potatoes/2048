@@ -26,6 +26,21 @@ h2 {
   padding: 3px;
 }
 
+#gameboard.gameover {
+  opacity: .5;
+  animation: opacity .8s ease-out;
+  -webkit-animation: opacity .8s ease-out;
+}
+
+#gameover-modal {
+  z-index: 10;
+  width: 200px;
+  height: 150px;
+  margin: auto;
+  text-align: center;
+}
+
+
 #gameboard tr {
   height: 125px;
   padding: 5px;

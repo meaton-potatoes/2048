@@ -31,6 +31,26 @@ Game.prototype.checkForOpenSpaces = function () {
   return response;
 };
 
+Game.prototype.over = function(){
+  let bool = true;
+  for (let x = 0; x < this.board.length; x++) {
+    for (let y = 0; y < this.board[x].length; y++) {
+      for (let dir in DIRECTIONAL_CONSTANTS) {
+        let diffX = DIRECTIONAL_CONSTANTS[dir][0];
+        let diffY = DIRECTIONAL_CONSTANTS[dir][1];
+        if (inBounds([x + diffX, y + diffY])) {
+          if (this.board[x][y] === this.board[x + diffX][y + diffY]) {
+            bool = false;
+          } else if (this.checkForOpenSpaces()) {
+            bool = false;
+          }
+        }
+      }
+    }
+  }
+  return bool;
+}
+
 Game.prototype.generateRandomTile = function(num) {
   if (!this.checkForOpenSpaces()) {
     return;
@@ -99,7 +119,18 @@ Game.prototype.moveTiles = function(direction){
   }
   this.generateRandomTile(1);
   this.render();
+  if (this.over()) {
+    $("#gameboard").addClass("gameover");
+    $("#gameover-modal").show();
+  }
 }
+
+$("#play-again").click(function(e){
+  $("#gameboard").removeClass("game-over");
+  let game = new Game();
+  game.render();
+});
+
 
 Game.prototype.moveTile = function(currentPos, currentValue, direction){
   let currentX = currentPos[0];
@@ -153,7 +184,6 @@ Game.prototype.moveTile = function(currentPos, currentValue, direction){
       break;
     }
   }
-  console.log(this.transitions);
   this.render();
   return;
 }

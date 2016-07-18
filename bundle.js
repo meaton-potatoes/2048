@@ -88,23 +88,25 @@
 	  this.render();
 	}
 	
-	
-	Game.prototype.openSpaces = function(){
+	Game.prototype.checkForOpenSpaces = function () {
+	  let response = false;
 	  this.board.forEach(function(row){
-	    row.forEach(function(pos){
-	      if (pos == null) {
-	        return true;
-	      }
-	    })
-	  })
-	  return false;
-	}
+	    if (row.some(function(pos){return pos == null})){
+	      response = true;
+	    }
+	  });
+	  return response;
+	};
 	
 	Game.prototype.generateRandomTile = function(num) {
+	  if (!this.checkForOpenSpaces()) {
+	    return;
+	  }
 	  for (let i = 0; i < num; i++) {
 	    let x = Math.round(Math.random() * 3)
 	    let y = Math.round(Math.random() * 3)
 	    while (this.board[x][y] !== null) {
+	      console.log("test");
 	      x = Math.round(Math.random() * 3)
 	      y = Math.round(Math.random() * 3)
 	    }
@@ -155,32 +157,32 @@
 	  let currentX = currentPos[0];
 	  let currentY = currentPos[1];
 	  let dir = DIRECTIONAL_CONSTANTS[direction];
-	  console.log(currentValue);
+	  // console.log(currentValue);
 	  while (true) { //while next move is still on the board;
 	    if (nextMoveInBounds([currentX, currentY], direction)){
-	      console.log("next move is in bounds");
+	      // console.log("next move is in bounds");
 	      if (this.nextMoveHitsAnotherTile([currentX, currentY], direction)){
-	        console.log("next move hits another tile");
+	        // console.log("next move hits another tile");
 	        let nextX = currentX + dir[0];
 	        let nextY = currentY + dir[1];
 	        if (this.board[nextX][nextY] === currentValue) {
-	          console.log("next move hits another LIKE current tile");
+	          // console.log("next move hits another LIKE current tile");
 	          this.board[nextX][nextY] *= 2;
 	          this.board[currentPos[0]][currentPos[1]] = null;
 	          break;
 	        } else {
-	          console.log("next move hits another tile that is UNLIKE current tile");
+	          // console.log("next move hits another tile that is UNLIKE current tile");
 	          this.board[currentPos[0]][currentPos[1]] = null;
 	          this.board[currentX][currentY] = currentValue;
 	          break;
 	        }
 	      } else {
-	        console.log("next move does not hit another tile");
+	        // console.log("next move does not hit another tile");
 	        currentX += dir[0];
 	        currentY += dir[1];
 	      }
 	    } else {
-	      console.log("next move is OUT of bounds");
+	      // console.log("next move is OUT of bounds");
 	      this.board[currentPos[0]][currentPos[1]] = null;
 	      this.board[currentX][currentY] = currentValue;
 	      break;
@@ -209,9 +211,9 @@
 	function colorFinder(value){
 	  switch (value){
 	    case 2:
-	      return "crimson";
-	    case 4:
 	      return "orangered";
+	    case 4:
+	      return "crimson";
 	    case 8:
 	      return "orange";
 	    case 16:

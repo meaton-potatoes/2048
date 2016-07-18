@@ -8,6 +8,15 @@ body {
 h1 {
   font-size: 4em;
   text-align: center;
+  margin-top: 10px;
+  margin-bottom: 0px;
+}
+
+h2 {
+  font-size: 2em;
+  text-align: center;
+  margin-top: 5px;
+  margin-bottom: 15px;
 }
 
 #gameboard {
@@ -18,12 +27,12 @@ h1 {
 }
 
 #gameboard tr {
-  height: 150px;
+  height: 125px;
   padding: 5px;
 }
 
 #gameboard td{
-  width: 150px;
+  width: 125px;
   border-radius: 4px;
   text-align: center;
   font-size: 4em;

@@ -77,6 +77,7 @@
 	
 	function Game(){
 	  this.generateBoard();
+	  this.score = 0;
 	}
 	
 	Game.prototype.generateBoard = function(){
@@ -106,7 +107,6 @@
 	    let x = Math.round(Math.random() * 3)
 	    let y = Math.round(Math.random() * 3)
 	    while (this.board[x][y] !== null) {
-	      console.log("test");
 	      x = Math.round(Math.random() * 3)
 	      y = Math.round(Math.random() * 3)
 	    }
@@ -115,6 +115,12 @@
 	};
 	
 	Game.prototype.render = function () {
+	  let lastScore = $("#gamescore").text();
+	  let scoreDiff = this.score - parseInt(lastScore);
+	  $("#gamescore").text(this.score);
+	  if (scoreDiff > 0) {
+	    $("#scorediff").text(`+${scoreDiff}`);
+	  }
 	  for (let x = 0; x < this.board.length; x++) {
 	    for (let y = 0; y < this.board.length; y++) {
 	      let color = colorFinder(this.board[x][y]);
@@ -132,6 +138,7 @@
 	};
 	
 	Game.prototype.moveTiles = function(direction){
+	  $("#scorediff").text("")
 	  if (["up", "left"].includes(direction)){
 	    for (let x = 0; x < this.board.length; x++) {
 	      for (let y = 0; y < this.board[x].length; y++) {
@@ -169,6 +176,7 @@
 	          // console.log("next move hits another LIKE current tile");
 	          this.board[nextX][nextY] *= 2;
 	          this.board[currentPos[0]][currentPos[1]] = null;
+	          this.score += this.board[nextX][nextY]
 	          break;
 	        } else {
 	          // console.log("next move hits another tile that is UNLIKE current tile");

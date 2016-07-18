@@ -14,7 +14,6 @@ Game.prototype.generateBoard = function(){
   for (let i = 0; i < this.board.length; i++) {
     this.board[i] = [null, null, null, null];
   }
-  this.render();
   this.generateRandomTile(2);
   this.render();
 }

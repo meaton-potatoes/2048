@@ -1,6 +1,7 @@
 const Game = require("./js/game");
 
 $(document).ready(function(){
+  $("#gameover-modal").hide();
   let game = new Game();
   game.render();
 

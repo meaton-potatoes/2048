@@ -26,9 +26,25 @@ h2 {
   padding: 3px;
 }
 
+#gameboard.gameover {
+  opacity: .5;
+  animation: opacity .8s ease-out;
+  -webkit-animation: opacity .8s ease-out;
+}
+
+#gameover-modal {
+  z-index: 10;
+  width: 200px;
+  height: 150px;
+  margin: auto;
+  text-align: center;
+}
+
+
 #gameboard tr {
   height: 125px;
   padding: 5px;
+  background-color: #6492ac;
 }
 
 #gameboard td{
@@ -37,4 +53,243 @@ h2 {
   text-align: center;
   font-size: 4em;
   color: #000;
+  background-color: #6492ac;
+}
+
+
+
+/********************** Animations ************************************/
+
+
+.new-tile {
+  animation: popout .5s ease-out;
+  -webkit-animation: popout .5s ease-out;
+}
+
+@keyframes popout {
+    from{transform:scale(0)}
+    80%{transform:scale(1)}
+    to{transform:scale(1)}
+}
+@-webkit-keyframes popout {
+    from{-webkit-transform:scale(0)}
+    80%{-webkit-transform:scale(1)}
+    to{-webkit-transform:scale(1)}
+}
+
+.double {
+  animation: double .3s ease-out;
+  -webkit-animation: double .3s ease-out;
+}
+
+@keyframes double {
+    from{transform:scale(0)}
+    80%{transform:scale(1.2)}
+    to{transform:scale(1)}
+}
+@-webkit-keyframes double {
+    from{-webkit-transform:scale(0)}
+    80%{-webkit-transform:scale(1)}
+    to{-webkit-transform:scale(1)}
+}
+
+.right-1 {
+  animation: right1 .2s ease-out;
+  -webkit-animation: right1 .2s ease-out;
+}
+
+@keyframes right1 {
+  from{transform:translateX(-130px)}
+  to{transform:transform:translateX(0)}
+}
+
+@-webkit-keyframes right1 {
+  from{-webkit-transform:translateX(-130px)}
+  to{-webkit-transform:transform:translateX(0)}
+}
+
+.right-2 {
+  animation: right2 .2s ease-out;
+  -webkit-animation: right2 .2s ease-out;
+}
+
+@keyframes right2 {
+  from{transform:translateX(-260px)}
+  to{transform:transform:translateX(0)}
+}
+
+@-webkit-keyframes right2 {
+  from{-webkit-transform:translateX(-260px)}
+  to{-webkit-transform:transform:translateX(0)}
+}
+
+.right-3 {
+  animation: right3 .2s ease-out;
+  -webkit-animation: right3 .2s ease-out;
+}
+
+@keyframes right3 {
+  from{transform:translateX(-390px)}
+  to{transform:transform:translateX(0)}
+}
+
+@-webkit-keyframes right3 {
+  from{-webkit-transform:translateX(-390px)}
+  to{-webkit-transform:transform:translateX(0)}
+}
+
+
+
+
+.left-1 {
+  animation: left1 .2s ease-out;
+  -webkit-animation: left1 .2s ease-out;
+}
+
+@keyframes left1 {
+  from{transform:translateX(130px)}
+  to{transform:transform:translateX(0)}
+}
+
+@-webkit-keyframes left1 {
+  from{-webkit-transform:translateX(130px)}
+  to{-webkit-transform:transform:translateX(0)}
+}
+
+.left-2 {
+  animation: left2 .2s ease-out;
+  -webkit-animation: left2 .2s ease-out;
+}
+
+@keyframes left2 {
+  from{transform:translateX(260px)}
+  to{transform:transform:translateX(0)}
+}
+
+@-webkit-keyframes left2 {
+  from{-webkit-transform:translateX(260px)}
+  to{-webkit-transform:transform:translateX(0)}
+}
+
+.left-3 {
+  animation: left3 .2s ease-out;
+  -webkit-animation: left3 .2s ease-out;
+}
+
+@keyframes left3 {
+  from{transform:translateX(390px)}
+  to{transform:transform:translateX(0)}
+}
+
+@-webkit-keyframes left3 {
+  from{-webkit-transform:translateX(390px)}
+  to{-webkit-transform:transform:translateX(0)}
+}
+
+
+
+
+
+
+
+
+
+
+
+.up-1 {
+  animation: up1 .2s ease-out;
+  -webkit-animation: up1 .2s ease-out;
+}
+
+@keyframes up1 {
+  from{transform:translateY(130px)}
+  to{transform:transform:translateY(0)}
+}
+
+@-webkit-keyframes up1 {
+  from{-webkit-transform:translateY(130px)}
+  to{-webkit-transform:transform:translateY(0)}
+}
+
+.up-2 {
+  animation: up2 .2s ease-out;
+  -webkit-animation: up2 .2s ease-out;
+}
+
+@keyframes up2 {
+  from{transform:translateY(260px)}
+  to{transform:transform:translateY(0)}
+}
+
+@-webkit-keyframes up2 {
+  from{-webkit-transform:translateY(260px)}
+  to{-webkit-transform:transform:translateY(0)}
+}
+
+.up-3 {
+  animation: up3 .2s ease-out;
+  -webkit-animation: up3 .2s ease-out;
+}
+
+@keyframes up3 {
+  from{transform:translateY(390px)}
+  to{transform:transform:translateY(0)}
+}
+
+@-webkit-keyframes up3 {
+  from{-webkit-transform:translateY(390px)}
+  to{-webkit-transform:transform:translateY(0)}
+}
+
+
+
+
+
+
+
+
+
+.down-1 {
+  animation: down1 .2s ease-out;
+  -webkit-animation: down1 .2s ease-out;
+}
+
+@keyframes down1 {
+  from{transform:translateY(-130px)}
+  to{transform:transform:translateY(0)}
+}
+
+@-webkit-keyframes down1 {
+  from{-webkit-transform:translateY(-130px)}
+  to{-webkit-transform:transform:translateY(0)}
+}
+
+.down-2 {
+  animation: down2 .2s ease-out;
+  -webkit-animation: down2 .2s ease-out;
+}
+
+@keyframes down2 {
+  from{transform:translateY(-260px)}
+  to{transform:transform:translateY(0)}
+}
+
+@-webkit-keyframes down2 {
+  from{-webkit-transform:translateY(-260px)}
+  to{-webkit-transform:transform:translateY(0)}
+}
+
+.down-3 {
+  animation: down3 .2s ease-out;
+  -webkit-animation: down3 .2s ease-out;
+}
+
+@keyframes down3 {
+  from{transform:translateY(-390px)}
+  to{transform:transform:translateY(0)}
+}
+
+@-webkit-keyframes down3 {
+  from{-webkit-transform:translateY(-390px)}
+  to{-webkit-transform:transform:translateY(0)}
 }

@@ -72,7 +72,11 @@ Game.prototype.render = function () {
   let scoreDiff = this.score - parseInt(lastScore);
   $("#gamescore").text(this.score);
   if (scoreDiff > 0) {
+    $("#scorediff").show();
     $("#scorediff").text(`+${scoreDiff}`);
+    setTimeout(function(){
+      $("#scorediff").text("")
+    }, 1000);
   }
   for (let x = 0; x < this.board.length; x++) {
     for (let y = 0; y < this.board.length; y++) {
@@ -124,12 +128,6 @@ Game.prototype.moveTiles = function(direction){
     $("#gameover-modal").show();
   }
 }
-
-$("#play-again").click(function(e){
-  $("#gameboard").removeClass("game-over");
-  let game = new Game();
-  game.render();
-});
 
 
 Game.prototype.moveTile = function(currentPos, currentValue, direction){

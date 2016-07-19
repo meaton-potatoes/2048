@@ -16,4 +16,11 @@ $(document).ready(function(){
       game.moveTiles("right");
     }
   });
+
+  $("#play-again").click(function(e){
+    $("#gameboard").removeClass("gameover");
+    $("#gameover-modal").hide();
+    game = new Game();
+    game.render();
+  });
 });

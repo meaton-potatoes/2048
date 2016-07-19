@@ -15,8 +15,14 @@ h1 {
 h2 {
   font-size: 2em;
   text-align: center;
-  margin-top: 5px;
-  margin-bottom: 15px;
+  margin-top: 5px auto 15px auto;
+  width: 540px;
+  display: flex;
+  justify-content: space-between;
+}
+
+#scorediff {
+  width: 50px;
 }
 
 #gameboard {
@@ -33,11 +39,38 @@ h2 {
 }
 
 #gameover-modal {
+  float: left;
+  position: absolute;
+  top: 40%;
+  left: 45%;
   z-index: 10;
   width: 200px;
   height: 150px;
-  margin: auto;
+  background-color: mintcream;
+  border-radius: 4px;
   text-align: center;
+  border: 3px solid #000;
+  font-size: 2em;
+}
+
+#gameover-modal div {
+  padding-top: 10%;
+}
+
+#gameover-modal button {
+  font-size: .5em;
+  width: 80%;
+  padding: 10px;
+  background-color: #fff;
+  border-radius: 4px;
+  border: 3px solid #000;
+  outline: none;
+}
+
+#gameover-modal button:hover {
+  cursor: pointer;
+  background-color: gold;
+  outline: none;
 }
 
 

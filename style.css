@@ -8,21 +8,23 @@ body {
 h1 {
   font-size: 4em;
   text-align: center;
-  margin-top: 10px;
+  margin-top: 15px;
   margin-bottom: 0px;
 }
 
 h2 {
   font-size: 2em;
   text-align: center;
-  margin-top: 5px auto 15px auto;
+  margin: 5px auto 15px auto;
   width: 540px;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
 }
 
 #scorediff {
-  width: 50px;
+  width: 30px;
+  margin-left: 5px;
+  color: gray;
 }
 
 #gameboard {

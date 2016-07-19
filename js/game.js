@@ -68,9 +68,9 @@ Game.prototype.generateRandomTile = function(num) {
 };
 
 Game.prototype.render = function () {
-  let lastScore = $("#gamescore").text();
+  let lastScore = parseInt($("#gamescore").text().split(": ")[1]);
   let scoreDiff = this.score - parseInt(lastScore);
-  $("#gamescore").text(this.score);
+  $("#gamescore").text("Score: " + this.score);
   if (scoreDiff > 0) {
     $("#scorediff").show();
     $("#scorediff").text(`+${scoreDiff}`);
@@ -125,7 +125,7 @@ Game.prototype.moveTiles = function(direction){
   this.render();
   if (this.over()) {
     $("#gameboard").addClass("gameover");
-    $("#gameover-modal").show();
+    $("#gameover-modal").show("slow");
   }
 }
 

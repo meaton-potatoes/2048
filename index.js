@@ -1,6 +1,12 @@
 const Game = require("./js/game");
 
 $(document).ready(function(){
+  $(document).bind("mobileinit", function () {
+      $.extend($.mobile, {
+          ajaxEnabled: false
+      });
+  });
+
   $("#gameover-modal").hide();
   let game = new Game();
   game.render();

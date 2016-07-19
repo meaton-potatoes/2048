@@ -47,12 +47,6 @@
 	const Game = __webpack_require__(1);
 	
 	$(document).ready(function(){
-	  $(document).bind("mobileinit", function () {
-	      $.extend($.mobile, {
-	          ajaxEnabled: false
-	      });
-	  });
-	
 	  $("#gameover-modal").hide();
 	  let game = new Game();
 	  game.render();

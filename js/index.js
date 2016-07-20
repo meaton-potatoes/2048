@@ -1,4 +1,4 @@
-const Game = require("./js/game");
+const Game = require("./game.js");
 
 $(document).ready(function(){
   $("#gameover-modal").hide();

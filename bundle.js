@@ -110,7 +110,6 @@
 	};
 	
 	Game.prototype.over = function(){
-	  let bool = true;
 	  for (let x = 0; x < this.board.length; x++) {
 	    for (let y = 0; y < this.board[x].length; y++) {
 	      for (let dir in DIRECTIONAL_CONSTANTS) {
@@ -118,15 +117,15 @@
 	        let diffY = DIRECTIONAL_CONSTANTS[dir][1];
 	        if (inBounds([x + diffX, y + diffY])) {
 	          if (this.board[x][y] === this.board[x + diffX][y + diffY]) {
-	            bool = false;
+	            return false;
 	          } else if (this.checkForOpenSpaces()) {
-	            bool = false;
+	            return false;
 	          }
 	        }
 	      }
 	    }
 	  }
-	  return bool;
+	  return true;
 	}
 	
 	Game.prototype.generateRandomTile = function(num) {
@@ -212,16 +211,12 @@
 	  let currentX = currentPos[0];
 	  let currentY = currentPos[1];
 	  let dir = DIRECTIONAL_CONSTANTS[direction];
-	  // console.log(currentValue);
 	  while (true) { //while next move is still on the board;
 	    if (nextMoveInBounds([currentX, currentY], direction)){
-	      // console.log("next move is in bounds");
 	      if (this.nextMoveHitsAnotherTile([currentX, currentY], direction)){
-	        // console.log("next move hits another tile");
 	        let nextX = currentX + dir[0];
 	        let nextY = currentY + dir[1];
 	        if (this.board[nextX][nextY] === currentValue) {
-	          // console.log("next move hits another LIKE current tile");
 	          this.board[nextX][nextY] *= 2;
 	          this.board[currentPos[0]][currentPos[1]] = null;
 	          this.score += this.board[nextX][nextY]
@@ -233,7 +228,6 @@
 	          }
 	          break;
 	        } else {
-	          // console.log("next move hits another tile that is UNLIKE current tile");
 	          this.board[currentPos[0]][currentPos[1]] = null;
 	          this.board[currentX][currentY] = currentValue;
 	          if (["up", "down"].includes(direction)) {
@@ -244,12 +238,10 @@
 	          break;
 	        }
 	      } else {
-	        // console.log("next move does not hit another tile");
 	        currentX += dir[0];
 	        currentY += dir[1];
 	      }
 	    } else {
-	      // console.log("next move is OUT of bounds");
 	      this.board[currentPos[0]][currentPos[1]] = null;
 	      this.board[currentX][currentY] = currentValue;
 	      if (["up", "down"].includes(direction)) {

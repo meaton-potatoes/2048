@@ -11,6 +11,11 @@
   </head>
   <body>
     <h1>2048</h1>
+    <table class="mobile-nav">
+      <tr><td></td><td class="up-caret">▲</td><td></td></tr>
+      <tr><td class="left-caret">◀</td><td></td><td class="right-caret">▶</td></tr>
+      <tr><td></td><td class="down-caret">▼</td><td></td></tr>
+    </table>
     <h2><span id="gamescore">Score: 0</span> <span id="scorediff"></span></h2>
     <div id='gameover-modal'>
       <div>
@@ -57,6 +62,11 @@
 
       ga('create', 'UA-82814961-2', 'auto');
       ga('send', 'pageview');
+
+
+      if (!(window.innerWidth <= 800 && window.innerHeight <= 600)) {
+        $(".mobile-nav").hide();
+      }
 
     </script>
   </body>

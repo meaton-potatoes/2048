@@ -69,6 +69,19 @@
 	    }
 	  });
 	
+	  $(".up-caret").click(function (e) {
+	    game.moveTiles("up");
+	  });
+	  $(".down-caret").click(function (e) {
+	    game.moveTiles("down");
+	  });
+	  $(".left-caret").click(function (e) {
+	    game.moveTiles("left");
+	  });
+	  $(".right-caret").click(function (e) {
+	    game.moveTiles("right");
+	  });
+	
 	  $("#play-again").click(function (e) {
 	    $("#gameboard").removeClass("gameover");
 	    $("#gameover-modal").hide();

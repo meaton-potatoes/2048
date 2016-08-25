@@ -21,6 +21,17 @@ h2 {
   justify-content: center;
 }
 
+.mobile-nav {
+  width: 100px;
+  margin: auto;
+}
+
+.mobile-nav tr td {
+  width: 10px;
+  text-align: center;
+  font-size: 24px;
+}
+
 p {
   width: 540px;
   margin: 10px auto 0;

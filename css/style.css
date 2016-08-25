@@ -36,6 +36,22 @@ h2 {
   color: #6492ac;
 }
 
+.up-caret {
+  content: 	"\25B2";
+}
+
+.down-caret {
+  content: "\25BC";
+}
+
+.right-caret {
+  content: "\25B8";
+}
+
+.left-caret {
+  content: "\25C0";
+}
+
 .caret:hover {
   cursor: pointer;
   color: #000;

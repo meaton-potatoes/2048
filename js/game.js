@@ -188,9 +188,9 @@ function nextMoveInBounds(currentPos, direction){
 }
 
 Game.prototype.nextMoveHitsAnotherTile = function(pos, direction){
-  dir = DIRECTIONAL_CONSTANTS[direction];
-  nextX = pos[0] + dir[0];
-  nextY = pos[1] + dir[1]
+  let dir = DIRECTIONAL_CONSTANTS[direction];
+  let nextX = pos[0] + dir[0];
+  let nextY = pos[1] + dir[1]
   return (this.board[nextX][nextY] !== null);
 }
 

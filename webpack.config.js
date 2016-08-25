@@ -8,5 +8,17 @@ module.exports = {
   resolve: {
     extensions: ["", ".js"]
   },
-  devtool: 'source-map'
+  devtool: 'source-map',
+  module: {
+    loaders: [
+      {
+        test: /\.js$/,
+        exclude: /(node_modules)/,
+        loader: 'babel',
+        query: {
+          presets: ['es2015']
+        }
+      }
+    ]
+  }
 };

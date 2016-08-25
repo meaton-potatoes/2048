@@ -12,9 +12,9 @@
   <body>
     <h1>2048</h1>
     <table class="mobile-nav">
-      <tr><td></td><td class="up-caret">▲</td><td></td></tr>
-      <tr><td class="left-caret">◀</td><td></td><td class="right-caret">▶</td></tr>
-      <tr><td></td><td class="down-caret">▼</td><td></td></tr>
+      <tr><td></td><td class="caret up-caret">&#9650;</td><td></td></tr>
+      <tr><td class="caret left-caret">&#9664;</td><td></td><td class="caret right-caret">&#9654;</td></tr>
+      <tr><td></td><td class="caret down-caret">&#9660;</td><td></td></tr>
     </table>
     <h2><span id="gamescore">Score: 0</span> <span id="scorediff"></span></h2>
     <div id='gameover-modal'>
@@ -71,7 +71,7 @@
        || navigator.userAgent.match(/iPod/i)
        || navigator.userAgent.match(/BlackBerry/i)
        || navigator.userAgent.match(/Windows Phone/i))){
-        $(".mobile-nav").hide();
+         $(".mobile-nav").hide();
       }
 
     </script>

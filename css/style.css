@@ -32,6 +32,15 @@ h2 {
   font-size: 24px;
 }
 
+.caret {
+  color: #6492ac;
+}
+
+.caret:hover {
+  cursor: pointer;
+  color: #000;
+}
+
 p {
   width: 540px;
   margin: 10px auto 0;

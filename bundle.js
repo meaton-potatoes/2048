@@ -220,7 +220,9 @@
 	      }
 	    }
 	  }
-	  this.generateRandomTile(1);
+	  if (this.anyMovement()) {
+	    this.generateRandomTile(1);
+	  }
 	  this.render();
 	  if (this.over()) {
 	    $("#gameboard").addClass("gameover");
@@ -292,6 +294,17 @@
 	  var nextX = pos[0] + dir[0];
 	  var nextY = pos[1] + dir[1];
 	  return this.board[nextX][nextY] !== null;
+	};
+	
+	Game.prototype.anyMovement = function () {
+	  for (var x = 0; x < this.transitions.length; x++) {
+	    for (var y = 0; y < this.transitions[x].length; y++) {
+	      if (this.transitions[x][y] !== null && this.transitions[x][y].split("-")[1] !== "0") {
+	        return true;
+	      }
+	    }
+	  }
+	  return false;
 	};
 	
 	function colorFinder(value) {
